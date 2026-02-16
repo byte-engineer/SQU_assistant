@@ -5,7 +5,7 @@ from google import genai
 class Chat():
 
     def __init__(self):
-        self.client = genai.Client(api_key="AIzaSyDwtxQoFE_SSwugUD42vPfsbVJfa30smNE")
+        self.client = genai.Client(api_key="NO Go Away")
 
         self.response = self.client.models.generate_content(
             model="gemini-3-flash-preview",
