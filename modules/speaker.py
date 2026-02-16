@@ -18,7 +18,7 @@ class Speaker:
             f'{self.executable} --model {self.model} --config {self.config} --output_raw | '
             f'aplay -r 22050 -f S16_LE -t raw'
         )
-        
+
         try:
             subprocess.run(command, shell=True, check=True)
         except subprocess.CalledProcessError as e:

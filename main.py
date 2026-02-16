@@ -1,3 +1,4 @@
+from time import 
 from modules.speaker import Speaker
 from modules.brain import Brain
 from modules.visuals import Visuals
@@ -15,8 +16,9 @@ def main():
     while True:
         # 1. State: IDLE / Wait for Wake Word
         visuals.show("idle")
+
         # wake_word_detected = listener.wait_for_keyword()
-        
+
         # 2. State: LISTEN
         # user_text = listener.listen_and_transcribe()
         user_text = input("Temporary Console Input: ") # Mock for testing
