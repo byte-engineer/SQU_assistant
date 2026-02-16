@@ -5,15 +5,15 @@ from faster_whisper import WhisperModel
 
 
 class Listener:
-    def __init__(self, model_size="medium", device="cpu"):
+    def __init__(self, model_size="small", device="cpu"):
         # Initialize Whisper Model (options: tiny, base, small, medium)
         self.model = WhisperModel(model_size, device=device, compute_type="int8")
         
         # Audio Settings
         self.format = pyaudio.paInt16
         self.channels = 1
-        self.rate = 16000 *2  # Whisper expects 16kHz
-        self.chunk = 1024
+        self.rate = int(16000 * 2) # Whisper expects 16kHz
+        self.chunk = int(1024 * 2)
         self.temp_file = "temp_recording.wav"
         
         self.audio = pyaudio.PyAudio()
@@ -36,7 +36,7 @@ class Listener:
             
         return user_text
 
-    def _record_audio(self, silence_threshold=500, silence_duration=1.5):
+    def _record_audio(self, silence_threshold=1500, silence_duration=1):
         """Records until a period of silence is detected."""
         stream = self.audio.open(format=self.format, channels=self.channels,
                                  rate=self.rate, input=True,

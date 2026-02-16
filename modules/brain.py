@@ -1,19 +1,27 @@
-import requests
-import json
+from google import genai
 
-class Brain:
-    def __init__(self, model="gemma3"):
-        self.url = "http://localhost:11434/api/generate"
-        self.model = model
 
-    def query(self, text):
-        payload = {
-            "model": self.model,
-            "prompt": text,
-            "stream": False
-        }
-        try:
-            response = requests.post(self.url, json=payload)
-            return response.json().get("response", "I'm sorry, I couldn't process that.")
-        except Exception as e:
-            return f"Error connecting to Ollama: {e}"
+
+class Chat():
+
+    def __init__(self):
+        self.client = genai.Client(api_key="AIzaSyDwtxQoFE_SSwugUD42vPfsbVJfa30smNE")
+
+        self.response = self.client.models.generate_content(
+            model="gemini-3-flash-preview",
+            contents="Explain how AI works in a few words",
+        )
+
+    def ask(self, quastion) -> str:
+        self.response = self.client.models.generate_content(
+            model="gemini-3-flash-preview",
+            contents=quastion,
+        )
+
+        return self.response.text
+
+
+if __name__ == "__main__":
+    bot = Chat()
+    res = bot.ask("What is the colotr of the sky?")
+    print(res)
